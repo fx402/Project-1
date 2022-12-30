@@ -7,6 +7,7 @@ import 'package:project_alfin/models/item_categories.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_alfin/models/item_categories_model.dart';
 import 'package:project_alfin/models/transaction_model.dart';
+import 'package:project_alfin/screen/transaksi.dart';
 import 'package:provider/provider.dart';
 
 class TrashListPage extends StatefulWidget {
@@ -25,14 +26,13 @@ Future<List<ItemCategories>> getData() async {
   var jsonData = json.decode(data.body);
   List<ItemCategories> itemCategoriess = [];
   for (var i in jsonData) {
-    ItemCategories itemCategories = new ItemCategories(
+    ItemCategories itemCategories = ItemCategories(
         id: i["id"],
         nameItem: i["nameItem"],
         prices: i["prices"],
         img: i["img"]);
     itemCategoriess.add(itemCategories);
   }
-  String responseString = data.body;
   if (data.statusCode == 200) {
     return itemCategoriess;
   } else {
@@ -41,36 +41,6 @@ Future<List<ItemCategories>> getData() async {
   }
 }
 
-Future<TransactionModel> createData(
-  List<ItemCategoriesModel> itemCategoriesModel,
-    Map<String, dynamic> jsonObjectUser) async {
-  // var data =
-  // await http.post(Uri.parse('http://10.0.2.2:8000/api/v1/transaction/create'),
-  //     headers:<String, String>{"Content-Type": "application/json"},
-  //     body: jsonEncode(<String, dynamic>{
-  //       "user": jsonObjectUser,
-  //       "itemCategories": jsonEncode(itemCategoriesModel),
-  //       "price":
-  //     }));
-
-  var jsonData = json.decode(data.body);
-  // List<TransactionModel> transactionModels = [];
-  // for (var i in jsonData) {
-  //   ItemCategories itemCategories = new ItemCategories(
-  //       id: i["id"],
-  //       nameItem: i["nameItem"],
-  //       prices: i["prices"],
-  //       img: i["img"]);
-  //   transactionModels.add(itemCategories);
-  // }
-  String responseString = data.body;
-  if (data.statusCode == 200) {
-    return itemCategoriess;
-  } else {
-    print('${data.statusCode}');
-    throw Exception('Failed created User');
-  }
-}
 
 class _TrashListPageState extends State<TrashListPage> {
   late List<ItemCategoriesModel> listItem;
@@ -114,11 +84,11 @@ class _TrashListPageState extends State<TrashListPage> {
                         itemBuilder: (_, index) => Container(
                           child: GestureDetector(
                             onTap: (){
-                              itemCategoriesModel.id = snapshot.data[index].id;
-                              itemCategoriesModel.nameItem = snapshot.data[index].nameItem;
-                              itemCategoriesModel.prices = snapshot.data[index].prices;
-                              itemCategoriesModel.img = snapshot.data[index].img;
-                              listItem.add(itemCategoriesModel);
+                              // itemCategoriesModel.id = snapshot.data[index].id;
+                              // itemCategoriesModel.nameItem = snapshot.data[index].nameItem;
+                              // itemCategoriesModel.prices = snapshot.data[index].prices;
+                              // itemCategoriesModel.img = snapshot.data[index].img;
+                              // listItem.add(itemCategoriesModel);
                             },
                             child: Card(
                               child: Column(
@@ -128,8 +98,7 @@ class _TrashListPageState extends State<TrashListPage> {
                                           image: NetworkImage(
                                               snapshot.data[index].img))),
                                           Text(snapshot.data[index].nameItem),
-                                          Text(snapshot.data[index].prices.toString() ??
-                                      "")
+                                          Text(snapshot.data[index].prices.toString() ?? "")
                                 ],
                               ),
                             ),
@@ -151,7 +120,9 @@ class _TrashListPageState extends State<TrashListPage> {
                       primary: Colors.lightGreen,
                       minimumSize: Size(size.width / 1.2, 40)),
                   child: const Text('Tukar Sampah'),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, TransaksiPage.routeName);
+                  },
                 ),
               ),
             )

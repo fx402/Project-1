@@ -48,6 +48,7 @@ class _LandingPageState extends State<LandingPage> {
   @override
   void initState() {
     super.initState();
+    getState();
     setState(() {
       _isLogin = Provider.of<DbProvider>(context, listen: false).users.isNotEmpty;
     });

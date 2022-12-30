@@ -10,15 +10,17 @@ class UserModel {
   String name;
   String email;
   String password;
+  int poin;
 
-  UserModel({required this.id, required this.name, required this.email, required this.password});
+  UserModel({required this.id, required this.name, required this.email, required this.password, required this.poin});
   // UserModel({});
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
     id : json['id'],
     name : json['name'],
     email : json['email'],
-    password : json['password']
+    password : json['password'],
+    poin : json['poin']
   );
 
 
@@ -28,6 +30,7 @@ class UserModel {
       'name': name,
       'email': email,
       'password': password,
+      'poin': poin,
     };
   }
 
@@ -35,7 +38,8 @@ class UserModel {
     id : map['id'],
     name : map['name'],
     email : map['email'],
-    password : map['password']
+    password : map['password'],
+      poin : map['poin']
   );
 
   Map<String, dynamic> toJson() {
@@ -44,6 +48,7 @@ class UserModel {
     data['name'] = this.name;
     data['email'] = this.email;
     data['password'] = this.password;
+    data['poin'] = this.poin;
     return data;
   }
 }

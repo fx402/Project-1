@@ -1,14 +1,15 @@
 class UserPref {
-  int? id;
+  int id;
   String name;
   String password;
+  String email;
   int isLogin;
-  int poin;
+  int? poin;
 
-  UserPref({this.id, required this.name,
+  UserPref({required this.id, required this.name,
     required this.password,
     required this.isLogin,
-  required this.poin});
+    required this.email, this.poin});
 
   Map<String, dynamic> toMap() {
     return {
@@ -16,7 +17,8 @@ class UserPref {
       'name': name,
       'password': password,
       'isLogin': isLogin,
-      'poin': poin,
+      'email': email,
+      'poin': poin as int?,
     };
   }
 
@@ -24,6 +26,7 @@ class UserPref {
       id : map['id'],
       name : map['name'],
       password : map['password'],
+      email : map['email'],
       isLogin : map['isLogin'],
       poin : map['poin'],
   );

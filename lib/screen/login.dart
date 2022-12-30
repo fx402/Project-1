@@ -24,9 +24,8 @@ Future<UserModel> loginUser(String name, String password, BuildContext context)a
   var data = await http.get(Uri.parse('http://10.0.2.2:8000/api/v1/user/login/$name/$password'));
 
   var jsonData = json.decode(data.body);
-  String responseString = data.body;
   if (data.statusCode == 200) {
-    return UserModel.fromJson(jsonDecode(responseString));
+    return UserModel.fromJson(jsonData);
   }else {
     print('${data.statusCode}');
     throw Exception('Failed created User');
@@ -37,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
   bool state = false;
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
-  late UserModel userModels;
+  UserModel userModels = new UserModel(id: 0, name: "", email: "", password: "", poin: 0);
 
   @override
   Widget build(BuildContext context) {
@@ -113,8 +112,11 @@ class _LoginPageState extends State<LoginPage> {
                                 String usernameText = username.text;
                                 String passwordText = password.text;
                                 UserModel userModel = await loginUser(usernameText, passwordText, context);
-                                UserPref userPref = new UserPref(name: usernameText,
-                                    password: passwordText, isLogin: 1, poin: 0);
+                                UserPref userPref = UserPref(
+                                  id: userModel.id,
+                                    name: usernameText,
+                                    email: userModel.email,
+                                    password: passwordText, isLogin: 1, poin: userModel.poin);
                                 Provider.of<DbProvider>(context, listen: false).addUser(userPref);
                                 usernameText = '';
                                 passwordText = '';
