@@ -322,7 +322,7 @@ class _HomePageState extends State<HomePage> {
                                           title: Text(
                                             //menampilkan data judul
                                             "Pemesan: ${snapshot.data[index].user
-                                                .name}" ?? "",
+                                                .name}",
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -330,8 +330,7 @@ class _HomePageState extends State<HomePage> {
                                               Icon(Icons.restore_from_trash),
                                           subtitle: Text(
                                             //menampilkan deskripsi berita
-                                            "Total: ${snapshot.data[index].price}" ??
-                                                "",
+                                            "Total: ${snapshot.data[index].price}",
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                           ),

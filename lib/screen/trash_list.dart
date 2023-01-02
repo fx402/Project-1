@@ -84,7 +84,7 @@ class _TrashListPageState extends State<TrashListPage> {
                                           image: NetworkImage(
                                               snapshot.data[index].img))),
                                           Text(snapshot.data[index].nameItem),
-                                          Text("${snapshot.data[index].prices}" ?? "")
+                                          Text("${snapshot.data[index].prices}")
                                 ],
                               ),
                             ),

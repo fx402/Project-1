@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
         MaterialPageRoute(
           builder: (context) => const HomePage(),
         ),
-            (route) => true);
+            (route) => false);
   }
   @override
   void initState() {
