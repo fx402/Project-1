@@ -1,14 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:project_alfin/data/database/database_helper.dart';
-import 'package:project_alfin/data/database/db_provider.dart';
 import 'package:project_alfin/models/item_categories.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_alfin/models/item_categories_model.dart';
-import 'package:project_alfin/models/transaction_model.dart';
 import 'package:project_alfin/screen/transaksi.dart';
-import 'package:provider/provider.dart';
 
 class TrashListPage extends StatefulWidget {
   static var routeName = '/trash-list';
@@ -47,11 +43,6 @@ class _TrashListPageState extends State<TrashListPage> {
   late ItemCategoriesModel itemCategoriesModel;
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> jsonObjectUser = {
-      "id": Provider.of<DbProvider>(context, listen: false).users.last.id,
-      "name": Provider.of<DbProvider>(context, listen: false).users.last.name,
-      "password": Provider.of<DbProvider>(context, listen: false).users.last.password
-    };
     var size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -84,11 +75,6 @@ class _TrashListPageState extends State<TrashListPage> {
                         itemBuilder: (_, index) => Container(
                           child: GestureDetector(
                             onTap: (){
-                              // itemCategoriesModel.id = snapshot.data[index].id;
-                              // itemCategoriesModel.nameItem = snapshot.data[index].nameItem;
-                              // itemCategoriesModel.prices = snapshot.data[index].prices;
-                              // itemCategoriesModel.img = snapshot.data[index].img;
-                              // listItem.add(itemCategoriesModel);
                             },
                             child: Card(
                               child: Column(

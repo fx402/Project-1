@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_alfin/data/database/db_provider.dart';
+import 'package:project_alfin/data/provider/auth_provider.dart';
 import 'package:project_alfin/screen/home.dart';
 import 'package:project_alfin/screen/login.dart';
 import 'package:project_alfin/screen/register.dart';
@@ -9,14 +9,17 @@ import 'package:provider/provider.dart';
 void main() {
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DbProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (context) => AuthProvider(),
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -43,25 +46,32 @@ class LandingPage extends StatefulWidget {
 }
 
 class _LandingPageState extends State<LandingPage> {
-  late bool _isLogin;
 
   @override
   void initState() {
+    initial();
     super.initState();
-    getState();
-    setState(() {
-      _isLogin = Provider.of<DbProvider>(context, listen: false).users.isNotEmpty;
-    });
   }
 
-  Future getState() async{
-    return _isLogin = Provider.of<DbProvider>(context, listen: false).users.isNotEmpty;
+
+  void initial() async {
+    final userProvider = Provider.of<AuthProvider>(context, listen: false);
+    final isLogin = await userProvider.isLogin;
+    if (isLogin) {
+      if (mounted) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomePage(),
+            ),
+                (route) => false);
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    print('$_isLogin');
-    return _isLogin ? HomePage() :  Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -74,13 +84,13 @@ class _LandingPageState extends State<LandingPage> {
                 Text(
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
                     textAlign: TextAlign.center,
-                    "Get  Your  Story"),
+                    "Clean your waste"),
                 Container(
                   margin: EdgeInsets.only(top: 10),
                   child: Text(
                     style: TextStyle(fontStyle: FontStyle.normal, fontSize: 16),
                       textAlign: TextAlign.center,
-                      "Show your expression with this app and find \nthe right moment on another person"),
+                      "Manage the waste become to clean \nThe clean environment can make you happy"),
                 ),
                 Container(
                   margin: EdgeInsets.only(top: 40),
@@ -93,7 +103,12 @@ class _LandingPageState extends State<LandingPage> {
                             primary: Colors.green, minimumSize: Size(150, 40)),
                         child: const Text('Register'),
                         onPressed: () {
-                          Navigator.pushNamed(context, RegisterPage.routeName);
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const RegisterPage(),
+                              ),
+                                  (route) => false);
                         },
                       ),
                       ElevatedButton(
@@ -101,7 +116,12 @@ class _LandingPageState extends State<LandingPage> {
                             primary: Colors.lightGreen, minimumSize: Size(150, 40)),
                         child: const Text('Login'),
                         onPressed: () {
-                          Navigator.pushNamed(context, LoginPage.routeName);
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const LoginPage(),
+                              ),
+                                  (route) => false);
                         },
                       ),
                     ],

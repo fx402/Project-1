@@ -1,9 +1,13 @@
 import 'dart:convert';
 
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:project_alfin/data/provider/auth_provider.dart';
+import 'package:project_alfin/models/auth_model.dart';
 import 'package:project_alfin/screen/home.dart';
 import 'package:project_alfin/screen/login.dart';
+import 'package:provider/provider.dart';
 
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;
@@ -39,6 +43,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController username = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  final formKey = GlobalKey<FormState>();
   late UserModel userModels;
   @override
   Widget build(BuildContext context) {
@@ -63,14 +68,15 @@ class _RegisterPageState extends State<RegisterPage> {
               SizedBox(
                 height: 20,
               ),
-              Form(child: Column(
+              Form(
+                key: formKey,
+                  child: Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: TextFormField(
                       style: textStyle,
                       controller: username,
-                      // validator: (String value){},
                       decoration: InputDecoration(
                         labelText: 'Username',
                         hintText: 'Enter your username',
@@ -89,6 +95,15 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: TextFormField(
                       style: textStyle,
                       controller: email,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Tidak boleh kosong';
+                        }
+                        if (!EmailValidator.validate(value)) {
+                          return 'Masukan email dengan benar!';
+                        }
+                        return null;
+                      },
                       // validator: (String value){},
                       decoration: InputDecoration(
                           labelText: 'Email',
@@ -106,9 +121,18 @@ class _RegisterPageState extends State<RegisterPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0),
                     child: TextFormField(
-                      style: textStyle,obscureText: true,
+                      style: textStyle,
+                      obscureText: true,
                       controller: password,
-                      // validator: (String value){},
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Tidak boleh kosong';
+                        }
+                        if (value.length < 4) {
+                          return 'Minimal 4 karakter';
+                        }
+                        return null;
+                      },
                       decoration: InputDecoration(
                           labelText: 'Password',
                           hintText: 'Enter your Password',
@@ -126,17 +150,36 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(primary: Colors.green.shade300,minimumSize: Size(size.width /1.3, 50)),
                           onPressed: () async {
-                          String usernameText = username.text;
-                          String emailText = email.text;
-                          String passwordText = password.text;
-                          UserModel userModel = await registerUsers(usernameText, emailText, passwordText, context);
-                          usernameText = '';
-                          emailText = '';
-                          passwordText = '';
-                          Navigator.pushNamed(context, LoginPage.routeName);
-                          setState(() {
-                            userModels = userModel;
-                          });
+                            if (formKey.currentState!.validate()) {
+
+                              String usernameText = username.text;
+                              String emailText = email.text;
+                              String passwordText = password.text;
+                              formKey.currentState!.save();
+                              UserModel userModel = await registerUsers(usernameText, emailText, passwordText, context);
+                              var result = userModel.id.toString().isNotEmpty;
+                              usernameText = '';
+                              emailText = '';
+                              passwordText = '';
+                              setState(() {
+                                userModels = userModel;
+                              });
+                              if (result == true) {
+                                if (mounted) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('Berhasil Mendaftar'),
+                                    ),
+                                  );
+                                  Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => const LoginPage(),
+                                      ),
+                                          (route) => false);
+                                }
+                              }
+                            }
                           },
                           child: Text(
                             'Register',
