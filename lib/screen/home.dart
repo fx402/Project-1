@@ -3,10 +3,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:project_alfin/data/provider/auth_provider.dart';
+import 'package:project_alfin/main.dart';
 import 'package:project_alfin/models/auth_model.dart';
 import 'package:project_alfin/models/transaction_model.dart';
 import 'package:project_alfin/screen/login.dart';
-import 'package:project_alfin/screen/main.dart';
 import 'package:project_alfin/screen/trash_list.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -50,10 +50,10 @@ class _HomePageState extends State<HomePage> {
     final response;
     if(id == null){
       response = await http
-          .get(Uri.parse("http://10.0.2.2:8000/api/v1/transaction"));
+          .get(Uri.parse("https://rest-api-waste-bank-production.up.railway.app/api/v1/transaction"));
     }else {
       response = await http
-          .get(Uri.parse("http://10.0.2.2:8000/api/v1/transaction/user/$id"));
+          .get(Uri.parse("https://rest-api-waste-bank-production.up.railway.app/api/v1/transaction/user/$id"));
     }
     var data = jsonDecode(response.body);
     print(data);
@@ -321,10 +321,8 @@ class _HomePageState extends State<HomePage> {
                                         child: ListTile(
                                           title: Text(
                                             //menampilkan data judul
-                                            "Pemesan: " +
-                                                    snapshot.data[index].user
-                                                        .name ??
-                                                "",
+                                            "Pemesan: ${snapshot.data[index].user
+                                                .name}" ?? "",
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -332,9 +330,7 @@ class _HomePageState extends State<HomePage> {
                                               Icon(Icons.restore_from_trash),
                                           subtitle: Text(
                                             //menampilkan deskripsi berita
-                                            "Total: " +
-                                                    snapshot.data[index].price
-                                                        .toString() ??
+                                            "Total: ${snapshot.data[index].price}" ??
                                                 "",
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,

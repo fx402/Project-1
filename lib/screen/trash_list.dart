@@ -17,7 +17,7 @@ class TrashListPage extends StatefulWidget {
 
 Future<List<ItemCategories>> getData() async {
   var data =
-      await http.get(Uri.parse('http://10.0.2.2:8000/api/v1/item-category'));
+      await http.get(Uri.parse('https://rest-api-waste-bank-production.up.railway.app/api/v1/item-category'));
 
   var jsonData = json.decode(data.body);
   List<ItemCategories> itemCategoriess = [];
@@ -84,7 +84,7 @@ class _TrashListPageState extends State<TrashListPage> {
                                           image: NetworkImage(
                                               snapshot.data[index].img))),
                                           Text(snapshot.data[index].nameItem),
-                                          Text(snapshot.data[index].prices.toString() ?? "")
+                                          Text("${snapshot.data[index].prices}" ?? "")
                                 ],
                               ),
                             ),

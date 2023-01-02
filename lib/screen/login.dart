@@ -20,7 +20,7 @@ class LoginPage extends StatefulWidget {
 }
 
 Future<UserModel> loginUser(String name, String password, BuildContext context)async {
-  var data = await http.get(Uri.parse('http://10.0.2.2:8000/api/v1/user/login/$name/$password'));
+  var data = await http.get(Uri.parse('https://rest-api-waste-bank-production.up.railway.app/api/v1/user/login/$name/$password'));
 
   var jsonData = json.decode(data.body);
   if (data.statusCode == 200) {

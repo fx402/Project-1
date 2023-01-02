@@ -23,7 +23,7 @@ class RegisterPage extends StatefulWidget {
 
 Future<UserModel> registerUsers(String username, String email, String password, BuildContext context)async {
   // var url  =Uri. "http://127.0.0.1:8000/api/v1/user/create";
-  var response = await http.post(Uri.parse('http://10.0.2.2:8000/api/v1/user/create'),
+  var response = await http.post(Uri.parse('https://rest-api-waste-bank-production.up.railway.app/api/v1/user/create'),
   headers:<String, String>{"Content-Type": "application/json"},
   body: jsonEncode(<String, String>{
     "name": username,

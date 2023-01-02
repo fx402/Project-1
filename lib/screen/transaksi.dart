@@ -22,7 +22,7 @@ class TransaksiPage extends StatefulWidget {
   State<TransaksiPage> createState() => _TransaksiPageState();
 }
 Future<UserModel> getUser(int? id) async{
-  var data = await http.get(Uri.parse("http://10.0.2.2:8000/api/v1/user/$id"));
+  var data = await http.get(Uri.parse("https://rest-api-waste-bank-production.up.railway.app/api/v1/user/$id"));
   var jsonData = json.decode(data.body);
   if(data.statusCode == 200){
     return UserModel.fromJson(jsonData);
@@ -33,7 +33,7 @@ Future<UserModel> getUser(int? id) async{
 }
 Future<List<ItemCategories>> getData() async {
   var data =
-      await http.get(Uri.parse('http://10.0.2.2:8000/api/v1/item-category'));
+      await http.get(Uri.parse('https://rest-api-waste-bank-production.up.railway.app/api/v1/item-category'));
 
   var jsonData = json.decode(data.body);
   List<ItemCategories> itemCategoriess = [];
@@ -56,7 +56,7 @@ Future<List<ItemCategories>> getData() async {
 Future<TransactionModel> createData(
     TransactionModel transactionModel) async {
   final data = await http.post(
-      Uri.parse('http://10.0.2.2:8000/api/v1/transaction/create'),
+      Uri.parse('https://rest-api-waste-bank-production.up.railway.app/api/v1/transaction/create'),
       headers: <String, String>{"Content-Type": "application/json"},
       body: jsonEncode(transactionModel.toJson()));
 
