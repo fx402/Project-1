@@ -2,15 +2,13 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:project_alfin/data/provider/auth_provider.dart';
-import 'package:project_alfin/main.dart';
-import 'package:project_alfin/models/auth_model.dart';
-import 'package:project_alfin/models/transaction_model.dart';
-import 'package:project_alfin/screen/login.dart';
-import 'package:project_alfin/screen/trash_list.dart';
+import 'package:gatherash/data/provider/auth_provider.dart';
+import 'package:gatherash/main.dart';
+import 'package:gatherash/models/transaction_model.dart';
+import 'package:gatherash/screen/login.dart';
+import 'package:gatherash/screen/trash_list.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   static const routeName = '/home';
@@ -282,12 +280,7 @@ class _HomePageState extends State<HomePage> {
                                 style: TextStyle(
                                     fontFamily: 'Montserrat',
                                     fontSize: 20,
-                                    fontWeight: FontWeight.bold)),
-                            Text('Lihat Semua',
-                                style: TextStyle(
-                                    fontFamily: 'Montserrat',
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400))
+                                    fontWeight: FontWeight.bold))
                           ],
                         ),
                       ),
@@ -300,7 +293,7 @@ class _HomePageState extends State<HomePage> {
                               case ConnectionState.none:
                               case ConnectionState.active:
                               case ConnectionState.waiting:
-                                return CircularProgressIndicator();
+                                return Center(child: CircularProgressIndicator());
                               case ConnectionState.done:
                                 if(snapshot.data.length == null){
                                   return Center(child: Text('Data Empty'));
@@ -322,7 +315,7 @@ class _HomePageState extends State<HomePage> {
                                           title: Text(
                                             //menampilkan data judul
                                             "Pemesan: ${snapshot.data[index].user
-                                                .name}",
+                                                .name} | ${snapshot.data[index].typeSend}",
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
@@ -330,7 +323,7 @@ class _HomePageState extends State<HomePage> {
                                               Icon(Icons.restore_from_trash),
                                           subtitle: Text(
                                             //menampilkan deskripsi berita
-                                            "Total: ${snapshot.data[index].price}",
+                                            "Total: ${snapshot.data[index].total} seharga ${snapshot.data[index].price}",
                                             maxLines: 2,
                                             overflow: TextOverflow.ellipsis,
                                           ),

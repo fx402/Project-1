@@ -1,4 +1,4 @@
-package com.alfin.project_alfin
+package com.project.gatherash
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,5 +1,5 @@
-import 'package:project_alfin/models/item_categories.dart';
-import 'package:project_alfin/models/user_model.dart';
+import 'package:gatherash/models/item_categories.dart';
+import 'package:gatherash/models/user_model.dart';
 
 class TransactionModel {
   int? id;
@@ -7,16 +7,14 @@ class TransactionModel {
   List<ItemCategories>? itemCategories;
   int? price;
   int? total;
-  // DateTime? createdAt;
-  // DateTime? updatedAt;
+  String? typeSend;
 
   TransactionModel(
       {required this.id,
         required this.user,
         required this.itemCategories,
         required this.price,
-        // required this.createdAt,
-        // required this.updatedAt,
+        required this.typeSend,
         required this.total});
 
     factory TransactionModel.fromJson(Map<String, dynamic> json) => TransactionModel(
@@ -32,6 +30,7 @@ class TransactionModel {
     ),
     price : json['price'],
     total : json['total'],
+    typeSend: json['typeSend']
     // createdAt : json['createdAt'],
     // updatedAt : json['updatedAt'],
   );
@@ -48,6 +47,7 @@ class TransactionModel {
     }
     data['price'] = this.price;
     data['total'] = this.total;
+    data['typeSend'] = this.typeSend;
     // data['createdAt'] = this.createdAt;
     // data['createdAt'] = this.createdAt;
     return data;

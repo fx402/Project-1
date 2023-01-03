@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:project_alfin/data/provider/auth_provider.dart';
-import 'package:project_alfin/models/auth_model.dart';
-import 'package:project_alfin/screen/home.dart';
-import 'package:project_alfin/screen/register.dart';
+import 'package:gatherash/data/provider/auth_provider.dart';
+import 'package:gatherash/models/auth_model.dart';
+import 'package:gatherash/screen/home.dart';
+import 'package:gatherash/screen/register.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user_model.dart';

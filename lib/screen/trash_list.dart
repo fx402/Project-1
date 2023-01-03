@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:project_alfin/models/item_categories.dart';
+import 'package:gatherash/models/item_categories.dart';
 import 'package:http/http.dart' as http;
-import 'package:project_alfin/models/item_categories_model.dart';
-import 'package:project_alfin/screen/transaksi.dart';
+import 'package:gatherash/models/item_categories_model.dart';
+import 'package:gatherash/screen/transaksi.dart';
 
 class TrashListPage extends StatefulWidget {
   static var routeName = '/trash-list';
@@ -63,7 +63,11 @@ class _TrashListPageState extends State<TrashListPage> {
                     case ConnectionState.none:
                     case ConnectionState.active:
                     case ConnectionState.waiting:
-                      return CircularProgressIndicator();
+                      return Container(
+                        height: 200,
+                          width: size.width/2,
+                          child: Container(
+                              child: CircularProgressIndicator()));
                     case ConnectionState.done:
                       print('${snapshot.data.length}');
                       return GridView.builder(

@@ -1,4 +1,4 @@
-import 'package:project_alfin/models/auth_model.dart';
+import 'package:gatherash/models/auth_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthPref {

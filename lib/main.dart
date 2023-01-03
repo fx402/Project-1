@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:project_alfin/data/provider/auth_provider.dart';
-import 'package:project_alfin/screen/home.dart';
-import 'package:project_alfin/screen/login.dart';
-import 'package:project_alfin/screen/register.dart';
-import 'package:project_alfin/screen/transaksi.dart';
-import 'package:project_alfin/screen/trash_list.dart';
+import 'package:gatherash/data/provider/auth_provider.dart';
+import 'package:gatherash/screen/home.dart';
+import 'package:gatherash/screen/login.dart';
+import 'package:gatherash/screen/register.dart';
+import 'package:gatherash/screen/transaksi.dart';
+import 'package:gatherash/screen/trash_list.dart';
 import 'package:provider/provider.dart';
 void main() {
   runApp(const MyApp());

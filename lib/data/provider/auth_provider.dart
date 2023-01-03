@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:project_alfin/data/preferencs/auth_pref.dart';
-import 'package:project_alfin/models/auth_model.dart';
+import 'package:gatherash/data/preferencs/auth_pref.dart';
+import 'package:gatherash/models/auth_model.dart';
 
 class AuthProvider extends ChangeNotifier {
   bool _isLogin = false;

@@ -1,0 +1,4 @@
+enum SendType{
+  DIANTAR,
+  JEMPUT
+}

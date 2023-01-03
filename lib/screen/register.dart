@@ -2,12 +2,7 @@ import 'dart:convert';
 
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:project_alfin/data/provider/auth_provider.dart';
-import 'package:project_alfin/models/auth_model.dart';
-import 'package:project_alfin/screen/home.dart';
-import 'package:project_alfin/screen/login.dart';
-import 'package:provider/provider.dart';
+import 'package:gatherash/screen/login.dart';
 
 import '../models/user_model.dart';
 import 'package:http/http.dart' as http;

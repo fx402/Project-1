@@ -1,7 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.alfin.project_alfin">
-   <application
-        android:label="project_alfin"
+    package="com.project.gatherash">
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:label="gatherash"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
