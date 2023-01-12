@@ -8,6 +8,7 @@ class TransactionModel {
   int? price;
   int? total;
   String? typeSend;
+  String address;
 
   TransactionModel(
       {required this.id,
@@ -15,7 +16,8 @@ class TransactionModel {
         required this.itemCategories,
         required this.price,
         required this.typeSend,
-        required this.total});
+        required this.total,
+      required this.address});
 
     factory TransactionModel.fromJson(Map<String, dynamic> json) => TransactionModel(
     id : json['id'],
@@ -30,8 +32,8 @@ class TransactionModel {
     ),
     price : json['price'],
     total : json['total'],
-    typeSend: json['typeSend']
-    // createdAt : json['createdAt'],
+    typeSend: json['typeSend'],
+    address : json['address'],
     // updatedAt : json['updatedAt'],
   );
 
@@ -48,6 +50,7 @@ class TransactionModel {
     data['price'] = this.price;
     data['total'] = this.total;
     data['typeSend'] = this.typeSend;
+    data['address'] = this.address;
     // data['createdAt'] = this.createdAt;
     // data['createdAt'] = this.createdAt;
     return data;

@@ -90,7 +90,7 @@ class _LoginPageState extends State<LoginPage> {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Icon(Icons.restore_from_trash, size: 100,),
+                    Image.asset("assets/logo.png"),
                     Text(
                       'Hello Guys',
                       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24, fontFamily: 'Montserrat'),

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gatherash/data/provider/auth_provider.dart';
+import 'package:gatherash/screen/change_poin.dart';
 import 'package:gatherash/screen/home.dart';
 import 'package:gatherash/screen/login.dart';
+import 'package:gatherash/screen/notification.dart';
 import 'package:gatherash/screen/register.dart';
 import 'package:gatherash/screen/transaksi.dart';
 import 'package:gatherash/screen/trash_list.dart';
@@ -30,7 +32,9 @@ class MyApp extends StatelessWidget {
           RegisterPage.routeName: (context) => RegisterPage(),
           HomePage.routeName: (context) => HomePage(),
           TrashListPage.routeName: (context) => TrashListPage(),
-          TransaksiPage.routeName: (context) => TransaksiPage()
+          TransaksiPage.routeName: (context) => TransaksiPage(),
+          NotificationPage.routeName: (context) => NotificationPage(),
+          ChangePoinPage.routeName: (context) => ChangePoinPage(),
         },
         home: const LandingPage(),
       ),
